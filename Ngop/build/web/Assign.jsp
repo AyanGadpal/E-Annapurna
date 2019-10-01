@@ -48,7 +48,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <div class="header-button">
-                              <h1>Assign Volunteers to Consumers</h1>
+                              <h1>Select Consumers</h1>
                             </div>
                         </div>
                     </div>
@@ -62,24 +62,8 @@
                     <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">data table</h3>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        <div class="rs-select2--light rs-select2--md">
-                                            
-                                                <select name="qwerty" id="qwerty">
-                                                <option value="area">Area</option>
-                                                <option value="quantity">Quantity</option>
-                                                <option value="shelter">Shelter</option>
-                                            </select>
-                                                  <div class="dropDownSelect2"></div>
-                                        </div>
-                                    </div>
-<!--                                            <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Submit</button>-->
-                                              
-                                          
-                                  </div>   
+                                <h3 class="title-5 m-b-35">Choose Consumer</h3>
+                                
                                 <div class="table-responsive table-responsive-data2">
                                     
                                     <table class="table table-data2">
@@ -113,7 +97,7 @@
                                                 <th class="text-right"><%=result.getString("FoodID")%></th>
                                                 <th class="text-right"><%=result.getString("Quantity")%></th>
                                                 <form action="assignConsumer.jsp">
-                                                <th class="text-right"><button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" name="cid" value="<%=result.getString("C_ID")%>">View Detail</button></th>
+                                                <th class="text-right"><button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" name="cid" value="<%=result.getString("C_ID")%>">Assign Volunteers</button></th>
                                                </form>
                                                 
                                             </tr>

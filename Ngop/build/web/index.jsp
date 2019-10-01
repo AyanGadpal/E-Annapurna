@@ -62,7 +62,7 @@ ResultSet result = null;
                                     int count = result.getRow();%>
                                     <!-- SET COUNT TO BOX-->
                                     <h2><%=count%></h2>
-                                    <span>Total Active Volunteers</span>
+                                    <span>Volunteers</span>
                                 </div>
                             </div>
                             <div class="overview-chart">

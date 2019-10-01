@@ -89,7 +89,8 @@
                                     </div>
                                             <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             <i class="zmdi zmdi-plus"></i>Submit</button>
-                                            </form>    
+                                            </form>   
+                                        
                                           
                                   </div>   
                                 <div class="table-responsive table-responsive-data2">
