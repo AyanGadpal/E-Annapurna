@@ -5,11 +5,48 @@
 Class.forName("com.mysql.jdbc.Driver");
 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ngo", "root", "");
 Statement st=conn.createStatement();
-ResultSet result = null;
+ResultSet result = null,A;
+
+A=null;
+A = st.executeQuery("select count(C_ID) as 'count' from `consumer` where AreaID=1");
+A.next();
+String C = A.getString("count");
+float A1C = Integer.parseInt(C);
+A = st.executeQuery("select count(C_ID) as 'count' from `consumer` where AreaID=2");
+A.next();
+C = A.getString("count");
+float A2C = Integer.parseInt(C);
+A = st.executeQuery("select count(C_ID) as 'count' from `consumer` where AreaID=3");
+A.next();
+C = A.getString("count");
+float A3C = Integer.parseInt(C);
+A = st.executeQuery("select count(C_ID) as 'count' from `consumer` where AreaID=4");
+A.next();
+C = A.getString("count");
+float A4C = Integer.parseInt(C);
+
+A = st.executeQuery("select count(v_id) as 'count' from `volunteer` where AreaID=1");
+A.next();
+C = A.getString("count");
+float V1C = Integer.parseInt(C);
+A = st.executeQuery("select count(v_id) as 'count' from `volunteer` where AreaID=2");
+A.next();
+C = A.getString("count");
+float V2C = Integer.parseInt(C);
+A = st.executeQuery("select count(v_id) as 'count' from `volunteer` where AreaID=3");
+A.next();
+C = A.getString("count");
+float V3C = Integer.parseInt(C);
+A = st.executeQuery("select count(v_id) as 'count' from `volunteer` where AreaID=4");
+A.next();
+C = A.getString("count");
+float V4C = Integer.parseInt(C);
 
 %>  
 <html>
 <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="./Chart.js"></script>
     <script>
       
         // Get the container element
@@ -18,7 +55,10 @@ ResultSet result = null;
             btns[0].className += " active";
             
         }
+        
+     
     </script>
+    
     
 </head>
 <body>
@@ -32,6 +72,7 @@ ResultSet result = null;
                     <div class="header-wrap">
                         <div class="header-button">
                           <h1>Analysis</h1>
+                          <button type="submit" style="margin-left:700px;" class="au-btn au-btn-icon au-btn--blue au-btn--small">Download Report </button>
                       </div>
                   </div>
               </div>
@@ -115,7 +156,7 @@ ResultSet result = null;
                             </div>
                         </div>
                         <div class="overview-chart">
-                            <canvas id="widgetChart2"></canvas>
+                            <canvas  id="myChart3"></canvas>
                         </div>
                     </div>
                 </div>
@@ -143,6 +184,108 @@ ResultSet result = null;
                 </div>
             </div>
         </div>
+     
+                                   <h1>  Analysys Charts</h1>
+                                   <br>   
+<div class="row">                                  
+<div class="col-lg-6">
+ <div class="au-card m-b-30">
+
+    <h1 class="title-2 ">Volunteers</h1>
+<canvas style="width:40vw;;height:50vh;"  class="au-card-inner" id="myChart2"  style="width=5vw"> </canvas>
+
+     </div>
+    </div>
+   
+ <div class="col-lg-6">
+ <div class="au-card m-b-30">                                  
+
+    <h1 class="title-2 ">Food Requiest</h1>
+<canvas style="width:40vw;;height:50vh;"  class="au-card-inner" id="myChart"  style="width=5vw"> </canvas>
+
+
+   </div> 
+ </div>
+    
+    <div class="col-lg-6">
+ <div class="au-card m-b-40">                                  
+<div  >
+    <h1 class="title-2 ">Some Graph</h1>
+<canvas style="width:35vw;;height:70vh;"  class="au-card-inner"  style="width=5vw"> </canvas>
+</div>
+
+   </div> 
+ </div>
+    </div>
+   
+
+<script src="./Chart.js"></script>
+
+<script>
+
+
+
+var ctx2 = document.getElementById('myChart2').getContext('2d');
+var myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['Katraj', 'Vakad', 'Swargate', 'Shivaji Nagar'],
+
+        datasets: [{
+
+            label: '# of Votes',
+            data: [<%=V1C%>,<%=V2C%>,<%=V3C%>,<%=V4C%>],
+            borderWidth: 2,
+           
+            
+            
+           backgroundColor: ['#ededed', '#1988ff', '#4ca2ff', '#7fbdff']
+        }]
+    }
+   
+});
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Katraj', 'Vakad', 'Swargate', 'Shivaji Nagar'],
+
+        datasets: [{
+
+            label: '# of Votes',
+            data: [<%=A1C%>,<%=A2C%>,<%=A3C%>,<%=A4C%>],
+            borderWidth: 2,
+
+            backgroundColor: ['#ededed', '#1988ff', '#4ca2ff', '#7fbdff']
+        }]
+    }
+   
+});
+
+var ctx3 = document.getElementById('myChart3').getContext('2d');
+var myChart3 = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: false,
+            data: [1, 2, 5, 4, 5, 2.5],
+          
+        }]
+    },
+    options: {
+    	elements: {
+            line: {
+                tension: 0 // disables bezier curves
+            }
+        }
+        
+    }
+});
+
+</script>
+      
     </div>
     <!-- END MAIN CONTENT-->
     <!-- END PAGE CONTAINER-->

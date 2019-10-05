@@ -95,7 +95,7 @@
 <!--                                                <th class="text-right"><%//=result.getString("date")%></th>-->
 <!--                                                <th class="text-right"><%//=result.getString("Status")%></th>-->
                                                 <th class="text-right"><%=result.getString("FoodID")%></th>
-                                                <th class="text-right"><%=result.getString("Quantity")%></th>
+                                                <th class="text-right"><%=result.getString("Quantity")%> Kg</th>
                                                 <form action="assignConsumer.jsp">
                                                 <th class="text-right"><button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" name="cid" value="<%=result.getString("C_ID")%>">Assign Volunteers</button></th>
                                                </form>
