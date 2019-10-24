@@ -3,7 +3,16 @@
  <%  
     Class.forName("com.mysql.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ngo", "root", "");
-    Statement st=conn.createStatement();%>
+    Statement st=conn.createStatement();
+    Statement st2=conn.createStatement();
+    ResultSet result2,areaVise;
+    result2 = st.executeQuery("select * from total_food where foodid=1");
+    result2.next();
+    String raw = result2.getString("Quantity");
+    result2 = st.executeQuery("select * from total_food where foodid=2");
+    result2.next();
+    String cook = result2.getString("Quantity");
+ %>
 <html>
     <head>
         <script> 
@@ -21,7 +30,7 @@
                                             
        if(cho == null)
        {
-           result = st.executeQuery("select * from consumer");
+           result = st.executeQuery("select * from consumer where C_ID not in(SELECT C_ID FROM allocation where date_tran = curdate())");
        }
        else 
        {
@@ -35,7 +44,8 @@
             result = st.executeQuery("select * from consumer order by Quantity desc");
            }
        }
-       
+      
+                    
        %>
     </head>
     <body>
@@ -59,12 +69,46 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
+                 <%
+                 Integer eflag =(Integer)session.getAttribute("ERROR_FOOD");
+                 Integer eflag2 =(Integer)session.getAttribute("ERROR_VOL");
+                 if(eflag != null || eflag2 != null)
+                 {
+                     if(eflag == 0)
+                     {
+                         %>
+                 <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                 <span class="badge badge-pill badge-danger">ERROR</span>
+                  Not Enough Food for this area
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                         <%
+                     }
+                     if(eflag2 == 0)
+                     {
+                         %>
+                 <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                 <span class="badge badge-pill badge-danger">ERROR</span>
+                  No Volunteers for this area
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                         <%
+                     }
+                 }
+                    %>
+                
+                    
                     <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
                                 <h3 class="title-5 m-b-35">Choose Consumer</h3>
-                                
+<!--                                <h3>Raw Food : <%=raw%> Kg and Cooked Food : <%=cook%>Kg</h3>-->
                                 <div class="table-responsive table-responsive-data2">
+                                    
                                     
                                     <table class="table table-data2">
                                         <thead>
@@ -85,16 +129,25 @@
                                         <tbody> 
                                              <%
                                                 while(result.next()){
+                                                    
+                                                     int areaId = result.getInt("AreaID");
+                                                int foodId = result.getInt("FoodID");
+                                                areaVise = st2.executeQuery("select areaName from area where AreaID = "+areaId+"");
+                                                areaVise.next();
+                                                String Area = areaVise.getString(1);
+                                                areaVise = st2.executeQuery("select food_type from total_food where FoodID = "+foodId+"");
+                                                areaVise.next();
+                                                String food = areaVise.getString(1);
                                              %>
                                             <tr class="tr-shadow">
                                              
                                                 <th><%=result.getString("hname")%></th>
                                                 <th><%=result.getString("mobno")%></th>
                                                 <th><%=result.getString("type_of_shelter")%></th>
-                                                <th><%=result.getString("AreaId")%></th>
+                                                <th><%=Area%></th>
 <!--                                                <th class="text-right"><%//=result.getString("date")%></th>-->
 <!--                                                <th class="text-right"><%//=result.getString("Status")%></th>-->
-                                                <th class="text-right"><%=result.getString("FoodID")%></th>
+                                                <th class="text-right"><%=food%></th>
                                                 <th class="text-right"><%=result.getString("Quantity")%> Kg</th>
                                                 <form action="assignConsumer.jsp">
                                                 <th class="text-right"><button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" name="cid" value="<%=result.getString("C_ID")%>">Assign Volunteers</button></th>

@@ -44,64 +44,29 @@
                    
                     <div class="col-lg-6">
                                 <!-- TOP CAMPAIGN-->
-                                <div class="top-campaign">
+                               <div class="top-campaign">
                                     <h3 class="title-3 m-b-30">top Donation</h3>
                                     <div class="table-responsive">
+                                        <%
+                                        ResultSet A = st.executeQuery("SELECT * from donor ORDER BY DonateAmt DESC LIMIT 10");
+                                        %>
                                         <table class="table table-top-campaign">
                                             <tbody>
-                                                <tr>
-                                                    <td>1. Australia</td>
-                                                    <td>$70,261.65</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2. United Kingdom</td>
-                                                    <td>$46,399.22</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3. Turkey</td>
-                                                    <td>$35,364.90</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4. Germany</td>
-                                                    <td>$20,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5. France</td>
-                                                    <td>$10,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3. Turkey</td>
-                                                    <td>$35,364.90</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4. Germany</td>
-                                                    <td>$20,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5. France</td>
-                                                    <td>$10,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3. Turkey</td>
-                                                    <td>$35,364.90</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4. Germany</td>
-                                                    <td>$20,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5. France</td>
-                                                    <td>$10,366.96</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4. Germany</td>
-                                                    <td>$20,366.96</td>
-                                                </tr>
+                                                <%while(A.next()){
+                                                    %>
+                                                    <tr>
+                                                    <td><%=A.getString("DonorName")%></td>
+                                                    <td><%=A.getString("DonateAmt")%></%></td>
+                                                    </tr>
+                                                <%
+                                                    
+                                                }%>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <!--  END TOP CAMPAIGN-->
+                                
                             </div>  
                          <div class="col-lg-3">
                                 <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">
@@ -109,39 +74,19 @@
                                         <h3 class="title-3 m-b-30" style="color:#fff;">Recent Donation</h3>
                                         <div class="table-responsive">
                                             <table class="table table-top-countries">
+                                                <%
+                                                A = st.executeQuery("SELECT * from donor ORDER BY d_id DESC LIMIT 10");
+                                                %>
                                                 <tbody>
+                                                    <%while(A.next()){
+                                                    %>
                                                     <tr>
-                                                        <td>United States</td>
-                                                        <td class="text-right">$119,366.96</td>
+                                                    <td><%=A.getString("DonorName")%></td>
+                                                    <td><%=A.getString("DonateAmt")%></%></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Australia</td>
-                                                        <td class="text-right">$70,261.65</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>United Kingdom</td>
-                                                        <td class="text-right">$46,399.22</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Turkey</td>
-                                                        <td class="text-right">$35,364.90</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Germany</td>
-                                                        <td class="text-right">$20,366.96</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>France</td>
-                                                        <td class="text-right">$10,366.96</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Australia</td>
-                                                        <td class="text-right">$5,366.96</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Italy</td>
-                                                        <td class="text-right">$1639.32</td>
-                                                    </tr>
+                                                <%
+                                                    
+                                                }%>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -150,7 +95,7 @@
                             </div>
                 </div>
                     <div class="row">
-                            <div style= "margin: 0px auto;"  class="col-lg-9">
+                            <div class="col-lg-9">
                                 <div class="table-responsive table--no-card m-b-30">
                                     <table class="table table-borderless table-striped table-earning">
                                 
@@ -165,17 +110,14 @@
                                         <tbody>
                                             <%
                                               ResultSet result = null;
-                                              result = st.executeQuery("select * from donor");
-                                                
-                                            while(result.next()){
-                                                 %>
+                                              result = st.executeQuery("select * from donor");                                                
+                                              while(result.next()){
+                                            %>
                                                 <tr>
-                                                <th><%=result.getString("donorpan")%></th>
-                                                <th><%=result.getString("donorname")%></th>
-                                                <th><%=result.getString("donoramt")%></th>
-                                                <th><%=result.getString("donoraaddress")%></th>
-                                              
-           
+                                                <th><%=result.getString("DonorName")%></th>
+                                                <th><%=result.getString("DonorPan")%></th>
+                                                <th><%=result.getString("DonorAddress")%></th>
+                                                <th><%=result.getString("DonateAmt")%></th>
                                                 <tr>
                                                 <%}%>
                                            

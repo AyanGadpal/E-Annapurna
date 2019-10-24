@@ -8,6 +8,7 @@
     Class.forName("com.mysql.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ngo", "root", "");
     Statement st=conn.createStatement();
+    Statement st2=conn.createStatement();
 
 %>  
 <html>
@@ -23,7 +24,7 @@
     </script>
        <%
        		String cho = request.getParameter("data");
-        	ResultSet result = null;
+        	ResultSet result = null,areaVise = null;
         	if(cho == null)
         	{
         		result = st.executeQuery("select * from volunteer");
@@ -43,7 +44,7 @@
         			result = st.executeQuery("select * from volunteer order by AreaId");
         		}
         		else if(cho.equals("status")){
-   					result = st.executeQuery("select * from volunteer order by status");     		
+   				result = st.executeQuery("select * from volunteer order by status");     		
         		}
         	}
        %>
@@ -99,6 +100,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Gender</th>
                                                 <th>Phone</th>
                                                 <th>Area</th>
                                                 <th class="text-right">Organization</th>
@@ -113,7 +115,14 @@
                                                 while(result.next()){
                                                 String s = null;
                                                 String color = null;
+                                                String gen = null;
                                                 int state = Integer.parseInt(result.getString("Status"));
+                                                int g = result.getInt("gender");
+                                                
+                                                if(g == 1)
+                                                    gen = "Male";
+                                                else
+                                                    gen = "Female";
                                                 if(state == 1)
                                                 {
                                                 	s = "BUSY";
@@ -133,16 +142,24 @@
                                                     s = "NOT AVAILABE";
                                                     color= "red";
                                                 }
+                                                int areaId = result.getInt("AreaID");
+                                                 areaVise = st2.executeQuery("select areaName from area where AreaID = "+areaId+"");
+                                                areaVise.next();
+                                                String Area = areaVise.getString(1);
+                                                
                                              %>
                                             <tr class="tr-shadow">
-                                             
                                                 <th><%=result.getString("fname")%></th>
-                                                <th><%=result.getString("email")%></th>
+                                                <th><%=result.getString("email")%>@mail.com</th>
+                                                <th><%=gen%></th>
                                                 <th><%=result.getString("mobno")%></th>
-                                                <th><%=result.getString("AreaId")%></th>
+                                                <th><%=Area%></th>
                                                 <th class="text-right"><%=result.getString("organization")%></th>
                                                 <th class="text-right"><%=result.getString("education")%></th>
-                                                <th class="text-right" style="color:<%=color%>"><%=s%></th>                     
+                                                <th class="text-right" style="color:<%=color%>"><%=s%></th>
+                                                <form action="volunteerData.jsp">
+                                                <th class="text-right"><button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" name="vid" value="<%=result.getString("v_id")%>">View Data</button></th>
+                                               </form>
                                             </tr>
                                             <tr class="spacer">
                                                 

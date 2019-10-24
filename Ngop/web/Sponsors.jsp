@@ -3,7 +3,8 @@
  <%  
     Class.forName("com.mysql.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ngo", "root", "");
-    Statement st=conn.createStatement();%>
+    Statement st=conn.createStatement();
+   Statement st2=conn.createStatement();%>
 <html>
     <head>
         <script> 
@@ -17,7 +18,7 @@
     </script>
        <%      
         String cho = request.getParameter("data");
-        ResultSet result = null;
+        ResultSet result = null,areaVise;
                                             
        if(cho == null)
        {
@@ -60,7 +61,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <div class="header-button">
-                              <h1>Sponsours</h1>
+                              <h1>Sponsors</h1>
                             </div>
                         </div>
                     </div>
@@ -110,6 +111,7 @@
                                                 <th class="text-right">Fund</th>
                                                 <th class="text-right">Food</th>
                                                 <th class="text-right">Row Grain</th>
+                                                <th class="text-right">View Data</th>
                                                 <th></th>
                                                     
                                             </tr>
@@ -117,20 +119,24 @@
                                         <tbody>
                                              <%
                                                 while(result.next()){
+                                                      int areaId = result.getInt("AreaID");
+                                                 areaVise = st2.executeQuery("select areaName from area where AreaID = "+areaId+"");
+                                                areaVise.next();
+                                                String Area = areaVise.getString(1);
                                              %>
                                             <tr class="tr-shadow">
                                              
                                                 <th><%=result.getString("spn_nm")%></th>
-                                                <th><%=result.getString("email")%></th>
+                                                <th><%=result.getString("email")%>@mail.com</th>
                                                 <th><%=result.getString("mobno")%></th>
                                                 <th><%=result.getString("whatentry")%></th>
-<!--                                                <th class="text-right"><%//=result.getString("date")%></th>-->
-<!--                                                <th class="text-right"><%//=result.getString("Status")%></th>-->
-                                                <th><%=result.getString("AreaId")%></th>
+                                                <th><%=Area%></th>
                                                 <th class="text-right"><%=result.getString("fund")%></th>
                                                 <th class="text-right"><%=result.getString("food")%></th>
                                                 <th class="text-right"><%=result.getString("rawgrain")%></th>
-                                                
+                                                <form action="sponsorsData.jsp">
+                                                <th class="text-right"><button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" name="sid" value="<%=result.getString("s_id")%>">View Data</button></th>
+                                                </form>
                                             </tr>
                                             <tr class="spacer">
                                                 

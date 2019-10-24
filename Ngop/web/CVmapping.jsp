@@ -58,7 +58,6 @@ ResultSet result = null;
              
              // Get the count of Total Volunteers
              result = st.executeQuery("select * from volunteer where AreaID = "+areaid+" and status = 0");
-             result.next();
              result.last();
              int total_vol = result.getRow();
              int cidi = Integer.parseInt(cid);
@@ -73,9 +72,11 @@ ResultSet result = null;
              consumer.last();
              String AL = consumer.getString("AllID");
              int ALID = Integer.parseInt(AL);
+             int cnt = 0;
              // Put Entry into Volunteer Allocation Table
              for(int k=0;k<total_vol;k++)
                {
+                   
                  // Checking The Checkbox Value
                  String val = request.getParameter(String.valueOf(k));
                  
@@ -83,7 +84,7 @@ ResultSet result = null;
                  if(val != null)
                  {
                    int vid = Integer.parseInt(val);
-                   
+                   cnt++;
                    // Mapping the AiiID with VID 
                    st.executeUpdate("INSERT INTO `vol_allocation` (`AllID`, `v_id`) VALUES ('"+ALID+"', '"+vid+"'); ");
                                  
@@ -92,9 +93,12 @@ ResultSet result = null;
                  }
                }
                
-               
-
-               
+               if(cnt == 0)
+               {     
+                   response.sendRedirect("Assign.jsp");
+               }
+               else
+               {
                
                %>
                
@@ -111,7 +115,6 @@ ResultSet result = null;
                <h1>Report</h1>
                <%
                 result = st.executeQuery("select * from vol_allocation where AllID = "+ALID+"");
-                out.print(ALID);
                %>
                <br>
                
@@ -132,7 +135,7 @@ ResultSet result = null;
                <%
                
 
-}%> </ol>
+}}%> </ol>
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->

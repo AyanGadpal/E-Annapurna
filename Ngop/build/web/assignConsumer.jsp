@@ -5,7 +5,9 @@
 Class.forName("com.mysql.jdbc.Driver");
 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ngo", "root", "");
 Statement st=conn.createStatement();
-
+ ResultSet result, consumer, fid;
+     session.setAttribute("ERROR_FOOD", 1);
+    session.setAttribute("ERROR_VOL", 1);
 %>  
 <html>
 <head>
@@ -15,6 +17,7 @@ Statement st=conn.createStatement();
         function ChangeActive(){
         	var btns = document.getElementsByClassName("btn");
         	btns[0].className += " active";
+               
         	
         }
     </script>
@@ -41,17 +44,47 @@ Statement st=conn.createStatement();
 
 			<!-- MAIN CONTENT-->
 			<div class="main-content">
+                          
+                            
+                            
 				<div class="section__content section__content--p30">
 					<%
 					String cid = request.getParameter("cid");
-					ResultSet result = null,consumer = null;
-					consumer = st.executeQuery("select * from consumer where C_id = '"+cid+"'");
+					result = null;
+                                        consumer = null;
+                                        fid = null;
+					consumer = st.executeQuery("select * from consumer where C_id = '"+cid+"'");   
 					consumer.next();
-					String cname = consumer.getString("hname");
+                                        int food_id = Integer.parseInt(consumer.getString("FoodID"));
+                                        float qty_c = Float.parseFloat(consumer.getString("Quantity"));
+                                        consumer.close();
+                                       
+                                        fid = st.executeQuery("select * from total_food where FoodID = '"+food_id+"'");
+                                        fid.next();
+					float qty_f = Float.parseFloat(fid.getString("Quantity"));
+                                        fid.close();
+                                        
+                                        consumer = st.executeQuery("select * from consumer where C_id = '"+cid+"'");   
+					consumer.next();
+                                        String cname = consumer.getString("hname");
 					String area = consumer.getString("AreaID");
 					int areaid = Integer.parseInt(area);
-					result = st.executeQuery("select * from volunteer where AreaID = "+areaid+" and status = 0");
-					session.setAttribute("cid", cid);
+					if(qty_f < qty_c)
+                                        {
+                                            session.setAttribute("ERROR_FOOD", 0);
+                                            response.sendRedirect("Assign.jsp");
+                                            
+                                        }
+                                        else{
+                                        result = st.executeQuery("select * from volunteer where AreaID = "+areaid+" and status = 0");
+                                        if(!result.next())
+                                        {
+                                            session.setAttribute("ERROR_VOL", 0);
+                                            response.sendRedirect("Assign.jsp");
+                                        }
+					else
+                                        {
+                                        session.setAttribute("cid", cid);
 					%>
 					<h1>Consumer Name : <%=cname%></h1>
 					
@@ -79,9 +112,8 @@ Statement st=conn.createStatement();
 								</thead>
 								<tbody>
 									<%int k =0;
-									while(result.next()){
-									
-									
+                                                                       
+									do{
 									%>
 									<tr class="tr-shadow">
 										
@@ -89,7 +121,7 @@ Statement st=conn.createStatement();
 											value="<%=result.getString("v_id")%>"
 											type="checkbox"></th> 
 											<th><%=result.getString("fname")%></th>
-											<th><%=result.getString("email")%></th>
+											<th><%=result.getString("email")%>@mail.com</th>
 											<th><%=result.getString("mobno")%></th>
 											<th><%=result.getString("AreaId")%></th>
 											<th class="text-right"><%=result.getString("organization")%></th>
@@ -97,11 +129,9 @@ Statement st=conn.createStatement();
 										
 									</tr>
 									<tr class="spacer"></tr>
-									
-									
-									
-									
-									<%k++;}%>
+									<%k++;}while(result.next());
+                                        }
+                                        }%>
 									
 								</tbody>
 							</table>

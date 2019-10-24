@@ -5,7 +5,8 @@
  <%  
     Class.forName("com.mysql.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ngo", "root", "");
-    Statement st=conn.createStatement();%>
+    Statement st=conn.createStatement();
+ Statement st2=conn.createStatement();%>
 <html>
     <head>
      
@@ -20,7 +21,7 @@
      </script>
        <%      
         String cho = request.getParameter("qwerty");
-        ResultSet result = null;
+        ResultSet result = null,areaVise;
                                             
        if(cho == null)
        {
@@ -102,18 +103,29 @@
                                         <tbody>
                                              <%
                                                 while(result.next()){
+                                                int areaId = result.getInt("AreaID");
+                                                int foodId = result.getInt("FoodID");
+                                                areaVise = st2.executeQuery("select areaName from area where AreaID = "+areaId+"");
+                                                areaVise.next();
+                                                String Area = areaVise.getString(1);
+                                                areaVise = st2.executeQuery("select food_type from total_food where FoodID = "+foodId+"");
+                                                areaVise.next();
+                                                String food = areaVise.getString(1);
+                                                
+                                                
+                                                
                                              %>
                                             <tr class="tr-shadow">
                                              
                                                 <th><%=result.getString("hname")%></th>
                                                 <th><%=result.getString("mobno")%></th>
                                                 <th><%=result.getString("type_of_shelter")%></th>
-                                                <th><%=result.getString("AreaId")%></th>
-<!--                                                <th class="text-right"><%//=result.getString("date")%></th>-->
-<!--                                                <th class="text-right"><%//=result.getString("Status")%></th>-->
-                                                <th class="text-right"><%=result.getString("FoodID")%></th>
-                                                <th class="text-right"><%=result.getString("Quantity")%></th>
-                                                
+                                                <th><%=Area%></th>           
+                                                <th class="text-right"><%=food%></th>
+                                                <th class="text-right"><%=result.getString("Quantity")%> Kg</th>
+                                                <form action="consumerData.jsp">
+                                                <th class="text-right"><button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" name="cid" value="<%=result.getString("C_ID")%>">View Data</button></th>
+                                               </form>
                                             </tr>
                                             <tr class="spacer">
                                                 
