@@ -16,11 +16,14 @@ The second part of the system is Admin Panel. It is used to Manage and analyze t
 Use Netbeans to import the project directly, both projects (Website & Admin Panel) will required to be imported separately.<br>
 Import the SQL database in MySQL
 ## Snapshots  
-### Web Site
-![Home]()
-![Home]()
-![Request food]()
 ### Admin Site
-![Home]()
-![Home]()
-![Request food]()
+![Login](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/admin.png)
+![Report](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/report.png)
+![Pending Food Request](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/food.png)
+### Web Site
+![Home](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/home.PNG)
+![Home](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/home2.PNG)
+![Request food](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/rf.PNG)
+## More 
+Please Refer to the [report]() for more Detail
+
