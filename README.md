@@ -27,5 +27,5 @@ Import the SQL database in MySQL
 ![Home](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/home2.PNG)
 ![Request food](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/rf.PNG)
 ## More 
-Please Refer to the [report](https://github.com/AyanGadpal/E-Annapurna/blob/master/EAnnapurna%20Report.pdf) for more Detail
+Please Refer to the [Documentation](https://github.com/AyanGadpal/E-Annapurna/tree/master/Documentation) for more Detail!
 
