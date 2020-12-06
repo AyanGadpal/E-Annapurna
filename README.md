@@ -1,5 +1,5 @@
 # E-Annapurna
-> **E-Annapurna : A platform where people and restaurants can share their remaining food with people who need it** <br>
+> **E-Annapurna : Platform where people and restaurants can share their remaining food with people who need it** <br>
 > Ayan Gadpal, [Manasi Chikorde](https://github.com/ManasiChikorde), Kalpit Chaudhari, [Dhananjay Deshmukh](https://github.com/dhananjaydeshmukh0) <br>
 ![Logo](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/EAnnapurna.png)
 
