@@ -1,7 +1,7 @@
 # E-Annapurna
 ![Logo](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/EAnnapurna.png)
 <br>
-Ayan Gadpal, Manasi Chikorde, Kalpit Chaudhari, [Dhananjay Deshmukh](https://github.com/dhananjaydeshmukh0)
+Ayan Gadpal, [Manasi Chikorde](https://github.com/ManasiChikorde), Kalpit Chaudhari, [Dhananjay Deshmukh](https://github.com/dhananjaydeshmukh0)
 ## Introduction
 The **E Annapurna** is a volunteer-based organization that works to get surplus food from restaurants to the less fortunate sections of society in cities across India. The organization functions on and propagates the basic ideology of self-sustained communities across the city i.e. each locality/community within the city will contribute towards providing food to the needy through its local volunteers and restaurants. The tradition of food distributed to the needy is sourced from restaurants, which regularly provide surplus or freshly cooked food on a goodwill basis.<br> 
 Our System provides both **Website** and **Admin Panel** for the E Annapurna. <br>
