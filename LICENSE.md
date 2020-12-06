@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2020 Ayan Gadpal, Kalpit Choudhari, Manasi Chikorde, Dnyaneshwar Bhand, Dhananjay Deshmukh
+Copyright (c) 2020 Ayan Gadpal, Kalpit Choudhari, Manasi Chikorde, Dhananjay Deshmukh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
