@@ -9,7 +9,14 @@ The **E Annapurna** is a volunteer-based organization that works to get surplus 
 Our System provides both **Website** and **Admin Panel** for the E Annapurna. <br>
 The Websites showcase the work of the organization to attract volunteers, Sponsors and donors. Also we get the information of those who are in need of food through the website. <br>
 The second part of the system is Admin Panel. It is used to Manage and analyze the NGO. It provides in-depth report with graphs donations, volunteers, sponsors and requests of food. It enables the NGO Admin to allocate volunteers to the specific consumer and analyze their report.
+
 ![Diagram](https://github.com/AyanGadpal/E-Annapurna/blob/master/images/E-Annapurna.png)
+
+## Demo
+
+<a href="https://www.youtube.com/watch?v=XjmDE-6pcm0"><img src="https://img.youtube.com/vi/XjmDE-6pcm0/0.jpg" alt="E-Annapurna Demo"></a>
+
+
 ## REQUIREMENTS
 * NetBeans IDE 8.0.1
 * Glassfish server 4.1 
