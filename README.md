@@ -25,6 +25,8 @@ The second part of the system is Admin Panel. It is used to Manage and analyze t
 * Bootstrap/css/JQuery 
 * Any Operating System 
 * Any web browser on user side for accessing the internet
+* mysql-connector-java-5.1.33-sources.jar (Find it in Required Jars folder, its a compile time libraries) 
+
 ## Getting Started
 Use Netbeans to import the project directly, both projects (Website & Admin Panel) will required to be imported separately.<br>
 Import the SQL database in MySQL
